@@ -32,7 +32,7 @@
 				<h3>상품 등록</h3>
 				<p>판매하고 싶은 상품의 정보를 입력해주세요</p>
 			</div>
-			<form action="/addItem" id="itemForm"  method="post">
+			<form th:action="@{/addItem}" th:object="${form}" id="itemForm" method="post">
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="chose_area">
@@ -52,7 +52,7 @@
 									<li>
 										<div class="searchform">
 											<p>상품 재고</p>
-											<input type="text" name="stock" placeholder="stock" />
+											<input type="text" name="stockQuantity" placeholder="stock" />
 										</div>
 									</li>
 								</ul>
@@ -61,91 +61,90 @@
 									<!--카테고리 1-->
 									<li class="single_field">
 										<label>카테고리 1</label>
-										<select class="level1" form="itemForm">
+										<select class="level1">
 											<option th:each="category, idx : ${rootCategory.subCategories}" th:class="'level1_' + ${idx.index}">
-												<span th:value="${category.name}" th:text="${category.name}"/>
+												<span th:text="${category.name}"/>
 											</option>
 										</select>
 									</li>
 									<!--카테고리 2-->
 									<li class="single_field">
 										<label>카테고리 2</label>
-										<select class="level2" form="itemForm">
+										<select class="level2">
 											<option th:each="category1, idx : ${rootCategory.subCategories.get(0).subCategories}" th:class="level2_0" style="display : none">
-												<span th:value="${category1.name}" th:text="${category1.name}"/>
+												<span th:text="${category1.name}"/>
 											</option>
 
 											<option th:each="category2, idx : ${rootCategory.subCategories.get(1).subCategories}" th:class="level2_1" style="display : none">
-												<span th:value="${category2.name}" th:text="${category2.name}"/>
+												<span th:text="${category2.name}"/>
 											</option>
 
 											<option th:each="category3, idx : ${rootCategory.subCategories.get(2).subCategories}" th:class="level2_2" style="display : none">
-												<span th:value="${category3.name}" th:text="${category3.name}"/>
+												<span th:text="${category3.name}"/>
 											</option>
 
 											<option th:each="category4, idx : ${rootCategory.subCategories.get(3).subCategories}" th:class="level2_3" style="display : none">
-												<span th:value="${category4.name}" th:text="${category4.name}"/>
+												<span th:text="${category4.name}"/>
 											</option>
 										</select>
 									</li>
 									<!--카테고리 3-->
 									<li class="single_field">
 										<label>카테고리 3</label>
-										<select class="level3" form="itemForm">
-
+										<select name="id" class="level3" form="itemForm">
 											<!--패션 하위-->
 											<option th:each="subCategory1, idx : ${rootCategory.subCategories.get(0).subCategories.get(0).subCategories}"
-													th:class="level3_1" style="display : none;">
-												<span th:value="${subCategory1.name}" th:text="${subCategory1.name}"/>
+													th:class="level3_1" style="display : none;"
+													value="${subCategory1.id}">
+												<span th:text="${subCategory1.name}"/>
 											</option>
 
 											<option th:each="subCategory2, idx : ${rootCategory.subCategories.get(0).subCategories.get(1).subCategories}"
-													th:class="level3_2" style="display : none;">
-												<span th:value="${subCategory2.name}" th:text="${subCategory2.name}"/>
+													th:class="level3_2" style="display : none;" th:value="${subCategory2.id}">
+												<span th:text="${subCategory2.name}"/>
 											</option>
 
 											<option th:each="subCategory3, idx : ${rootCategory.subCategories.get(0).subCategories.get(2).subCategories}"
-													th:class="level3_3" style="display : none;">
-												<span th:value="${subCategory3.name}" th:text="${subCategory3.name}"/>
+													th:class="level3_3" style="display : none;" th:value="${subCategory3.id}">
+												<span th:text="${subCategory3.name}"/>
 											</option>
 
 											<option th:each="subCategory4, idx : ${rootCategory.subCategories.get(0).subCategories.get(3).subCategories}"
-													th:class="level3_4" style="display : none;">
-												<span th:value="${subCategory4.name}" th:text="${subCategory4.name}"/>
+													th:class="level3_4" style="display : none;" th:value="${subCategory4.id}">
+												<span th:text="${subCategory4.name}"/>
 											</option>
 
 											<option th:each="subCategory5, idx : ${rootCategory.subCategories.get(0).subCategories.get(4).subCategories}"
-													th:class="level3_5" style="display : none;">
-												<span th:value="${subCategory5.name}" th:text="${subCategory5.name}"/>
+													th:class="level3_5" style="display : none;" th:value="${subCategory5.id}">
+												<span th:text="${subCategory5.name}"/>
 											</option>
 
 
 											<!--디지털 하위-->
 											<option th:each="subCategory6, idx : ${rootCategory.subCategories.get(1).subCategories.get(0).subCategories}"
-													th:class="level3_6" style="display : none;">
-												<span th:value="${subCategory6.name}" th:text="${subCategory6.name}"/>
+													th:class="level3_6" style="display : none;" th:value="${subCategory6.id}">
+												<span th:text="${subCategory6.name}"/>
 											</option>
 
 											<option th:each="subCategory7, idx : ${rootCategory.subCategories.get(1).subCategories.get(1).subCategories}"
-													th:class="level3_7" style="display : none;">
-												<span th:value="${subCategory7.name}" th:text="${subCategory7.name}"/>
+													th:class="level3_7" style="display : none;" th:value="${subCategory7.id}">
+												<span th:text="${subCategory7.name}"/>
 											</option>
 
 											<option th:each="subCategory8, idx : ${rootCategory.subCategories.get(1).subCategories.get(2).subCategories}"
-													th:class="level3_8" style="display : none;">
-												<span th:value="${subCategory8.name}" th:text="${subCategory8.name}"/>
+													th:class="level3_8" style="display : none;" th:value="${subCategory8.id}">
+												<span th:text="${subCategory8.name}"/>
 											</option>
 
 											<option th:each="subCategory9, idx : ${rootCategory.subCategories.get(1).subCategories.get(3).subCategories}"
-													th:class="level3_9" style="display : none;">
-												<span th:value="${subCategory9.name}" th:text="${subCategory9.name}"/>
+													th:class="level3_9" style="display : none;" th:value="${subCategory9.id}">
+												<span th:text="${subCategory9.name}"/>
 											</option>
-
 
 										</select>
 									</li>
 								</ul>
-							<a class="btn btn-default update" type="submit">등록</a>
+							<a class="btn btn-default update"><button type="submit">등록</button></a>
 						</div>
 					</div>
 				</div>
@@ -199,6 +198,10 @@
 					$(".level3_3").css("display", "none");
 					$(".level3_4").css("display", "none");
 					$(".level3_5").css("display", "none");
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '남성') {
 					$(".level3_1").css("display", "none");
@@ -206,6 +209,10 @@
 					$(".level3_3").css("display", "none");
 					$(".level3_4").css("display", "none");
 					$(".level3_5").css("display", "none");
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '아동') {
 					$(".level3_1").css("display", "none");
@@ -213,6 +220,10 @@
 					$(".level3_3").css("display", "block");
 					$(".level3_4").css("display", "none");
 					$(".level3_5").css("display", "none");
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '스포츠') {
 					$(".level3_1").css("display", "none");
@@ -220,6 +231,10 @@
 					$(".level3_3").css("display", "none");
 					$(".level3_4").css("display", "block");
 					$(".level3_5").css("display", "none");
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '잡화') {
 					$(".level3_1").css("display", "none");
@@ -227,35 +242,58 @@
 					$(".level3_3").css("display", "none");
 					$(".level3_4").css("display", "none");
 					$(".level3_5").css("display", "block");
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
 				}
 
 				//디지털
 				else if($(".level2").val() == '컴퓨터') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
 					$(".level3_6").css("display", "block");
 					$(".level3_7").css("display", "none");
 					$(".level3_8").css("display", "none");
 					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '냉장고') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
 					$(".level3_6").css("display", "none");
 					$(".level3_7").css("display", "block");
 					$(".level3_8").css("display", "none");
 					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '청소기') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
 					$(".level3_6").css("display", "none");
 					$(".level3_7").css("display", "none");
 					$(".level3_8").css("display", "block");
 					$(".level3_9").css("display", "none");
 				}
 				else if($(".level2").val() == '세탁기/건조기') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
 					$(".level3_6").css("display", "none");
 					$(".level3_7").css("display", "none");
 					$(".level3_8").css("display", "none");
 					$(".level3_9").css("display", "block");
 				}
 			});
-
 		});
 	</script>
 </body>

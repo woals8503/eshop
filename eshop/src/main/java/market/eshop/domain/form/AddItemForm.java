@@ -9,8 +9,8 @@ import lombok.*;
 public class AddItemForm {
 
     private String name;
-    private String imagePath;
     private int price;
     private int stockQuantity;
-    private Long categoryId;
+    private Long id;
+    private String imagePath;
 }

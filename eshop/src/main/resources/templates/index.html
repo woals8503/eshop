@@ -78,25 +78,24 @@
 				<div class="col-sm-9 padding-right">
 
 					<!--features_items-->
-
 					<div class="features_items">
-						<h2 class="title text-center">Features Items</h2>
-						<div class="col-sm-4">
+						<h2 class="title text-center">Items</h2>
+						<div class="col-sm-4" th:each="items, idx : ${items.getContent()}">
 							<div class="product-image-wrapper">
 								<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="images/home/product1.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-										<div class="product-overlay">
-											<div class="overlay-content">
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-										</div>
+									<div class="productinfo text-center">
+										<img src="images/home/JPA책.PNG" alt="" />
+										<h2 th:text="${items.name}"></h2>
+										<p th:text="${items.price}"></p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니 담기</a>
+									</div>
+<!--									<div class="product-overlay">-->
+<!--										<div class="overlay-content">-->
+<!--											<h2>$56</h2>-->
+<!--											<p>Easy Polo Black Edition</p>-->
+<!--											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
+<!--										</div>-->
+<!--									</div>-->
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
@@ -107,13 +106,41 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="pagination-area" style="text-align : center;">
-						<ul class="pagination">
-							<li><a href="" class="active">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+						<ul class="pagination"
+							th:with="start=${(pages.number/maxPage)*maxPage + 1},
+                 					 end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) < pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})">
+<!--							<li th:if="${start > 1}">-->
+<!--								<a th:href="@{/catalog?(page=0)}">-->
+<!--									<i class="fa fa-angle-double-left"></i>-->
+<!--								</a>-->
+<!--							</li>-->
+
+							<li th:if="${start > 1}">
+								<a th:href="@{/catalog?(page=${start - (maxPage+1)})}">
+									<i class="fa fa-angle-double-left"></i>
+								</a>
+							</li>
+
+							<li th:each="page: ${#numbers.sequence(start, end)}">
+								<a th:href="@{/catalog?(page=${page-1})}" th:text="${page}" th:classappend="${page} == ${nowPage} ? 'active' : ''"></a></li>
+							</li>
+
+							<li th:if="${end < pages.totalPages}">
+								<a th:href="@{/catalog?(page=${start + maxPage})}">
+									<i class="fa fa-angle-double-right"></i>
+								</a>
+							</li>
+
+<!--							<li th:if="${end < pages.totalPages}">-->
+<!--								<a th:href="@{/catalog?(page=${pages.totalPages-1})}">-->
+<!--									<i class="fa fa-angle-double-right"/>-->
+<!--								</a>-->
+<!--							</li>-->
+
+<!--							<li><a href=""><i class="fa fa-angle-double-left"></i></a></li>-->
+<!--							<li><a href="" class="active"></a></li>-->
+<!--							<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>-->
 						</ul>
 					</div>
 

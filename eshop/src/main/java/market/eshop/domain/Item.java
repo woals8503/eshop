@@ -1,9 +1,6 @@
-package market.eshop.domain.item;
+package market.eshop.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import market.eshop.domain.base.BaseEntity;
 
 import javax.persistence.Column;
@@ -26,4 +23,12 @@ public class Item extends BaseEntity {
 
     private Long categoryId;
 
+    @Builder
+    public Item(String imagePath, String name, int price, int stockQuantity, Long categoryId) {
+        this.imagePath = imagePath;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.categoryId = categoryId;
+    }
 }

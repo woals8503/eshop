@@ -5,13 +5,12 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import market.eshop.domain.dto.CatalogSummary;
 import market.eshop.domain.dto.QCatalogSummary;
 import market.eshop.domain.form.ItemSearchForm;
-import market.eshop.domain.item.QItem;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static market.eshop.domain.item.QItem.*;
+import static market.eshop.domain.QItem.item;
 
 @Repository
 public class CatalogDao {

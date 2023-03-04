@@ -27,7 +27,6 @@ public class CategoryService {
         //부모 생성
         CategoryDto rootCategoryDto = new CategoryDto(0l, "ROOT", null);
         addSubCategories(rootCategoryDto, groupParentId);
-
         return rootCategoryDto;
     }
 
