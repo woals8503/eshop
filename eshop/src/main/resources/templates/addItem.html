@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | E-Shopper</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+	<header th:replace="fragments/header :: header"/>
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>상품 등록</h3>
+				<p>판매하고 싶은 상품의 정보를 입력해주세요</p>
+			</div>
+			<form action="/addItem" id="itemForm"  method="post">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="chose_area">
+								<ul class="user_option">
+									<li>
+										<div class="searchform">
+											<p>상품 이름</p>
+											<input type="text" name="name" placeholder="Item name"/>
+										</div>
+									</li>
+									<li>
+										<div class="searchform">
+											<p>상품 가격</p>
+											<input type="text" name="price" placeholder="Item Price" />
+										</div>
+									</li>
+									<li>
+										<div class="searchform">
+											<p>상품 재고</p>
+											<input type="text" name="stock" placeholder="stock" />
+										</div>
+									</li>
+								</ul>
+							<a class="btn btn-default update">사진 첨부</a>
+								<ul class="user_info">
+									<!--카테고리 1-->
+									<li class="single_field">
+										<label>카테고리 1</label>
+										<select class="level1" form="itemForm">
+											<option th:each="category, idx : ${rootCategory.subCategories}" th:class="'level1_' + ${idx.index}">
+												<span th:value="${category.name}" th:text="${category.name}"/>
+											</option>
+										</select>
+									</li>
+									<!--카테고리 2-->
+									<li class="single_field">
+										<label>카테고리 2</label>
+										<select class="level2" form="itemForm">
+											<option th:each="category1, idx : ${rootCategory.subCategories.get(0).subCategories}" th:class="level2_0" style="display : none">
+												<span th:value="${category1.name}" th:text="${category1.name}"/>
+											</option>
+
+											<option th:each="category2, idx : ${rootCategory.subCategories.get(1).subCategories}" th:class="level2_1" style="display : none">
+												<span th:value="${category2.name}" th:text="${category2.name}"/>
+											</option>
+
+											<option th:each="category3, idx : ${rootCategory.subCategories.get(2).subCategories}" th:class="level2_2" style="display : none">
+												<span th:value="${category3.name}" th:text="${category3.name}"/>
+											</option>
+
+											<option th:each="category4, idx : ${rootCategory.subCategories.get(3).subCategories}" th:class="level2_3" style="display : none">
+												<span th:value="${category4.name}" th:text="${category4.name}"/>
+											</option>
+										</select>
+									</li>
+									<!--카테고리 3-->
+									<li class="single_field">
+										<label>카테고리 3</label>
+										<select class="level3" form="itemForm">
+
+											<!--패션 하위-->
+											<option th:each="subCategory1, idx : ${rootCategory.subCategories.get(0).subCategories.get(0).subCategories}"
+													th:class="level3_1" style="display : none;">
+												<span th:value="${subCategory1.name}" th:text="${subCategory1.name}"/>
+											</option>
+
+											<option th:each="subCategory2, idx : ${rootCategory.subCategories.get(0).subCategories.get(1).subCategories}"
+													th:class="level3_2" style="display : none;">
+												<span th:value="${subCategory2.name}" th:text="${subCategory2.name}"/>
+											</option>
+
+											<option th:each="subCategory3, idx : ${rootCategory.subCategories.get(0).subCategories.get(2).subCategories}"
+													th:class="level3_3" style="display : none;">
+												<span th:value="${subCategory3.name}" th:text="${subCategory3.name}"/>
+											</option>
+
+											<option th:each="subCategory4, idx : ${rootCategory.subCategories.get(0).subCategories.get(3).subCategories}"
+													th:class="level3_4" style="display : none;">
+												<span th:value="${subCategory4.name}" th:text="${subCategory4.name}"/>
+											</option>
+
+											<option th:each="subCategory5, idx : ${rootCategory.subCategories.get(0).subCategories.get(4).subCategories}"
+													th:class="level3_5" style="display : none;">
+												<span th:value="${subCategory5.name}" th:text="${subCategory5.name}"/>
+											</option>
+
+
+											<!--디지털 하위-->
+											<option th:each="subCategory6, idx : ${rootCategory.subCategories.get(1).subCategories.get(0).subCategories}"
+													th:class="level3_6" style="display : none;">
+												<span th:value="${subCategory6.name}" th:text="${subCategory6.name}"/>
+											</option>
+
+											<option th:each="subCategory7, idx : ${rootCategory.subCategories.get(1).subCategories.get(1).subCategories}"
+													th:class="level3_7" style="display : none;">
+												<span th:value="${subCategory7.name}" th:text="${subCategory7.name}"/>
+											</option>
+
+											<option th:each="subCategory8, idx : ${rootCategory.subCategories.get(1).subCategories.get(2).subCategories}"
+													th:class="level3_8" style="display : none;">
+												<span th:value="${subCategory8.name}" th:text="${subCategory8.name}"/>
+											</option>
+
+											<option th:each="subCategory9, idx : ${rootCategory.subCategories.get(1).subCategories.get(3).subCategories}"
+													th:class="level3_9" style="display : none;">
+												<span th:value="${subCategory9.name}" th:text="${subCategory9.name}"/>
+											</option>
+
+
+										</select>
+									</li>
+								</ul>
+							<a class="btn btn-default update" type="submit">등록</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section><!--/#do_action-->
+	<footer th:replace="fragments/footer :: footer"/>
+    <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			$(".level1").click(function() {
+				if($(".level1").val() == '패션') {
+
+					$(".level2_0").css("display", "block");
+					$(".level2_1").css("display", "none");
+					$(".level2_2").css("display", "none");
+					$(".level2_3").css("display", "none");
+
+				}
+				else if($(".level1").val() == '전자기기') {
+					$(".level2_1").css("display", "block");
+					$(".level2_0").css("display", "none");
+					$(".level2_2").css("display", "none");
+					$(".level2_3").css("display", "none");
+
+				}
+				else if($(".level1").val() == '도서') {
+					$(".level2_2").css("display", "block");
+					$(".level2_0").css("display", "none");
+					$(".level2_1").css("display", "none");
+					$(".level2_3").css("display", "none");
+
+				}
+				else if($(".level1").val() == '식품') {
+					$(".level2_3").css("display", "block");
+					$(".level2_0").css("display", "none");
+					$(".level2_1").css("display", "none");
+					$(".level2_2").css("display", "none");
+				}
+
+			});
+
+			$(".level2").click(function() {
+				if($(".level2").val() == '여성') {
+					$(".level3_1").css("display", "block");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
+				}
+				else if($(".level2").val() == '남성') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "block");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
+				}
+				else if($(".level2").val() == '아동') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "block");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "none");
+				}
+				else if($(".level2").val() == '스포츠') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "block");
+					$(".level3_5").css("display", "none");
+				}
+				else if($(".level2").val() == '잡화') {
+					$(".level3_1").css("display", "none");
+					$(".level3_2").css("display", "none");
+					$(".level3_3").css("display", "none");
+					$(".level3_4").css("display", "none");
+					$(".level3_5").css("display", "block");
+				}
+
+				//디지털
+				else if($(".level2").val() == '컴퓨터') {
+					$(".level3_6").css("display", "block");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
+				}
+				else if($(".level2").val() == '냉장고') {
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "block");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "none");
+				}
+				else if($(".level2").val() == '청소기') {
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "block");
+					$(".level3_9").css("display", "none");
+				}
+				else if($(".level2").val() == '세탁기/건조기') {
+					$(".level3_6").css("display", "none");
+					$(".level3_7").css("display", "none");
+					$(".level3_8").css("display", "none");
+					$(".level3_9").css("display", "block");
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>
