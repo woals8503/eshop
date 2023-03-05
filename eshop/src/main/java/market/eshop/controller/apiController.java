@@ -1,6 +1,7 @@
 package market.eshop.controller;
 
 import market.eshop.domain.dto.ItemDto;
+import market.eshop.domain.form.ItemSearchForm;
 import market.eshop.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,8 +25,9 @@ public class apiController {
 
     @GetMapping("/test/page")
     public Page<ItemDto> pageTest() {
+        ItemSearchForm itemSearchForm = new ItemSearchForm();
         PageRequest pageRequest = PageRequest.of(0, 3);
-        Page<ItemDto> result = itemRepository.findAllItemInfo(pageRequest);
+        Page<ItemDto> result = itemRepository.findAllItemInfo(pageRequest, itemSearchForm);
         for (ItemDto itemDto : result) {
             System.out.println("itemDto = " + itemDto);
         }

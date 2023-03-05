@@ -50,16 +50,61 @@
 			</div>
 		</div>
 	</div>
-
 	<!--/header-bottom-->
+
 	<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Category</h2>
 
-						<div th:replace="fragments/category"/>
+
+						<!-- Category -->
+
+						<h2>Category</h2>
+						<div class="panel-group category-products" id="accordian">
+							<div class="panel panel-default" th:each="category, idx : ${rootCategory.subCategories}">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" th:href="'#' + ${category.name}">
+
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											<p th:text="${category.name}"></p>
+										</a>
+									</h4>
+								</div>
+								<!-- level2-->
+								<div th:id="${category.name}" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li th:each="level2, lv2Idx : ${rootCategory.subCategories.get(idx.index).subCategories}">
+												<a th:href="'#' + ${level2.name}" th:data-toggle="collapse" th:data-parent="'#' + ${category.name}">
+													<span th:text="${level2.name}"></span>
+												</a>
+												<!-- level3-->
+												<div th:id="${level2.name}" class="panel-collapse collapse">
+													<div class="panel-body">
+														<ul>
+															<form action="/catalog"></form>
+															<li th:each="lv3 : ${rootCategory.subCategories.get(idx.index).subCategories.get(lv2Idx.index).subCategories}">
+																<a th:href="@{/catalog(id=${lv3.id})}">
+																	<span th:text="${lv3.name}"></span>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<!-- level3-->
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- level2-->
+							</div>
+						</div>
+
+						<!-- Category -->
+
 						<!--price-range-->
 
 						<div class="price-range">
@@ -71,12 +116,11 @@
 						</div>
 
 						<!--/price-range-->
-
 					</div>
 				</div>
 
-				<div class="col-sm-9 padding-right">
 
+				<div class="col-sm-9 padding-right">
 					<!--features_items-->
 					<div class="features_items">
 						<h2 class="title text-center">Items</h2>
@@ -89,13 +133,6 @@
 										<p th:text="${items.price}"></p>
 										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니 담기</a>
 									</div>
-<!--									<div class="product-overlay">-->
-<!--										<div class="overlay-content">-->
-<!--											<h2>$56</h2>-->
-<!--											<p>Easy Polo Black Edition</p>-->
-<!--											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
-<!--										</div>-->
-<!--									</div>-->
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
@@ -110,11 +147,6 @@
 						<ul class="pagination"
 							th:with="start=${(pages.number/maxPage)*maxPage + 1},
                  					 end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) < pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})">
-<!--							<li th:if="${start > 1}">-->
-<!--								<a th:href="@{/catalog?(page=0)}">-->
-<!--									<i class="fa fa-angle-double-left"></i>-->
-<!--								</a>-->
-<!--							</li>-->
 
 							<li th:if="${start > 1}">
 								<a th:href="@{/catalog?(page=${start - (maxPage+1)})}">
@@ -132,121 +164,9 @@
 								</a>
 							</li>
 
-<!--							<li th:if="${end < pages.totalPages}">-->
-<!--								<a th:href="@{/catalog?(page=${pages.totalPages-1})}">-->
-<!--									<i class="fa fa-angle-double-right"/>-->
-<!--								</a>-->
-<!--							</li>-->
-
-<!--							<li><a href=""><i class="fa fa-angle-double-left"></i></a></li>-->
-<!--							<li><a href="" class="active"></a></li>-->
-<!--							<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>-->
 						</ul>
 					</div>
-
 					<!--features_items-->
-
-					<!--recommended_items-->
-
-					<div class="recommended_items">
-						<h2 class="title text-center">인기 상품</h2>
-
-						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner">
-								<div class="item active">
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-								<i class="fa fa-angle-left"></i>
-							  </a>
-							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-								<i class="fa fa-angle-right"></i>
-							  </a>
-						</div>
-					</div>
-
-					<!--/recommended_items-->
-
 				</div>
 			</div>
 		</div>

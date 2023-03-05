@@ -1,16 +1,19 @@
 package market.eshop.controller;
 
 import lombok.RequiredArgsConstructor;
+import market.eshop.domain.Item;
+import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.form.AddItemForm;
 import market.eshop.service.CategoryService;
 import market.eshop.service.ItemService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,4 +35,5 @@ public class ItemController {
         Long item = itemService.saveItem(addItemForm);
         return "redirect:/catalog";
     }
+
 }

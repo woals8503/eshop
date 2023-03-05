@@ -1,9 +1,12 @@
 package market.eshop.repository;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import market.eshop.domain.QCategory;
 import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.dto.QItemDto;
+import market.eshop.domain.form.ItemSearchForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +16,7 @@ import javax.persistence.EntityManager;
 
 import java.util.List;
 
+import static market.eshop.domain.QCategory.*;
 import static market.eshop.domain.QItem.*;
 
 @Repository
@@ -25,7 +29,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
     }
 
     @Override
-    public Page<ItemDto> findAllItemInfo(Pageable pageable) {
+    public Page<ItemDto> findAllItemInfo(Pageable pageable, ItemSearchForm searchForm) {
         QueryResults<ItemDto> results = queryFactory
                 .select(new QItemDto(
                         item.name,
@@ -34,6 +38,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.categoryId
                 ))
                 .from(item)
+                .where(nameLike(searchForm.getName()), categoryEq(searchForm.getCategoryId()))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
@@ -44,23 +49,17 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
         return new PageImpl<>(content, pageable, total);
     }
 
-    @Override
-    public Page<ItemDto> paging(Pageable pageable) {
-        QueryResults<ItemDto> results = queryFactory
-                .select(new QItemDto(
-                        item.name,
-                        item.imagePath,
-                        item.price,
-                        item.categoryId
-                ))
-                .from(item)
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetchResults();
-
-        List<ItemDto> content = results.getResults();
-        long total = results.getTotal();
-
-        return new PageImpl<>(content, pageable, total);
+    private Predicate nameLike(String name) {
+        if(name != null && name.length() > 0)
+            return item.name.like("%" + name + "%");
+        return null;
     }
+
+    private Predicate categoryEq(Long categoryId) {
+        if(categoryId != null)
+            return item.categoryId.eq(categoryId);
+        return null;
+    }
+
+
 }

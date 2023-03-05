@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,6 +20,7 @@ public class Category {
     @Column(name = "category_name")
     private String name;
     private Long parentId;
+
 
     public Category(String name, Long parentId) {
         this.name = name;

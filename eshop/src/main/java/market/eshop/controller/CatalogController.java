@@ -1,8 +1,8 @@
 package market.eshop.controller;
 
 import lombok.RequiredArgsConstructor;
+import market.eshop.domain.Category;
 import market.eshop.domain.Member;
-import market.eshop.domain.dto.CatalogSummary;
 import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.form.ItemSearchForm;
 import market.eshop.repository.MemberRepository;
@@ -13,17 +13,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-public class CategoryController {
+public class CatalogController {
 
     private final CategoryService categoryService;
     private final CatalogService catalogService;
@@ -38,33 +34,36 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/catalog")
-    public String getMainPage(@RequestParam(value = "category", required = false) Long category,
-                              @ModelAttribute ItemSearchForm itemForm,
+    public String getMainPage(@RequestParam(value = "id", required = false) Long category,
+                              @ModelAttribute ItemSearchForm searchForm,
                               @CookieValue(name = "memberId", required = false) Long memberId,
                               @RequestParam(value = "page", defaultValue = "0") int page,
                               Model model) {
-        /** category */
         model.addAttribute("rootCategory", categoryService.createCategoryRoot());
+
+        if(searchForm == null)
+            model.addAttribute("itemSearchForm", new ItemSearchForm());
+        else
+            model.addAttribute("itemSearchForm", searchForm);
+
+        searchForm.setCategoryId(category);
 
         PageRequest pageRequest = PageRequest.of(page, 6);
 
-        Page<ItemDto> items = itemService.findAllItem(pageRequest);
+        Page<ItemDto> items = itemService.findAllItem(pageRequest, searchForm);
+        int pageNumber = items.getPageable().getPageNumber();
         model.addAttribute("items", items);
         model.addAttribute("pages", items);
         model.addAttribute("maxPage", 5);
-        int pageNumber = items.getPageable().getPageNumber();
         model.addAttribute("nowPage", (pageNumber+1));
 
-        /** category */
-
-        /** member */
         if(memberId == null) return "index";
 
         Optional<Member> loginMember = memberRepository.findById(memberId);
         if(loginMember == null) return "index";
 
         model.addAttribute("member", loginMember);
-        /** member */
+
         return "index";
     }
 }
