@@ -8,4 +8,5 @@ import org.springframework.data.domain.Pageable;
 public interface ItemRepositoryCustom {
     Page<ItemDto> findAllItemInfo(Pageable pageable, ItemSearchForm searchForm);
 
+    ItemDto findByitem(Long itemId);
 }

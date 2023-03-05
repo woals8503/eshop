@@ -39,4 +39,7 @@ public class ItemService {
         return result;
     }
 
+    public ItemDto findByItem(Long itemId) {
+        return itemRepository.findByitem(itemId);
+    }
 }

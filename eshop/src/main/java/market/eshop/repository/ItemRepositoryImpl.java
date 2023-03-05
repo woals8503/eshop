@@ -3,7 +3,9 @@ package market.eshop.repository;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import market.eshop.domain.Item;
 import market.eshop.domain.QCategory;
+import market.eshop.domain.QItem;
 import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.dto.QItemDto;
 import market.eshop.domain.form.ItemSearchForm;
@@ -32,6 +34,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
     public Page<ItemDto> findAllItemInfo(Pageable pageable, ItemSearchForm searchForm) {
         QueryResults<ItemDto> results = queryFactory
                 .select(new QItemDto(
+                        item.id,
                         item.name,
                         item.imagePath,
                         item.price,
@@ -47,6 +50,23 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
         long total = results.getTotal();
 
         return new PageImpl<>(content, pageable, total);
+    }
+
+    @Override
+    public ItemDto findByitem(Long itemId) {
+        ItemDto findItem = queryFactory
+                .select(new QItemDto(
+                        item.id,
+                        item.name,
+                        item.imagePath,
+                        item.price,
+                        item.categoryId
+                        ))
+                .from(item)
+                .where(item.id.eq(itemId))
+                .fetchOne();
+
+        return findItem;
     }
 
     private Predicate nameLike(String name) {

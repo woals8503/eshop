@@ -36,4 +36,13 @@ public class ItemController {
         return "redirect:/catalog";
     }
 
+    @GetMapping("/itemDetail")
+    public String itemDetail(@RequestParam(value = "id") Long itemId,
+                             Model model) {
+        model.addAttribute("rootCategory", categoryService.createCategoryRoot());
+        ItemDto findItem = itemService.findByItem(itemId);
+        model.addAttribute("item", findItem);
+        return "itemDetail";
+    }
+
 }

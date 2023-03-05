@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 @Setter
 @NoArgsConstructor
 public class ItemDto {
+    private Long id;
     private String name;
     private String imagePath;
     private int price;
     private Long categoryId;
 
     @QueryProjection
-    public ItemDto(String name, String imagePath, int price, Long categoryId) {
+    public ItemDto(Long id, String name, String imagePath, int price, Long categoryId) {
+        this.id = id;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
