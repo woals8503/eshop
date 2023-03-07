@@ -1,4 +1,4 @@
-package market.eshop.repository;
+package market.eshop.repository.custom;
 
 import market.eshop.domain.Member;
 import market.eshop.domain.form.LoginForm;

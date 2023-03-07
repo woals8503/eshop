@@ -1,4 +1,4 @@
-package market.eshop.domain;
+package market.eshop.domain.embadded;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

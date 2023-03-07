@@ -144,30 +144,31 @@
 
 						</div>
 						<div class="col-sm-7">
-							<!--/product-information-->
-							<div class="product-information">
-								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2 th:text="${item.name}"></h2>
-								<p>Web ID: 1089772</p>
-								<img src="images/product-details/rating.png" alt="" />
-								<span>
-									<span th:text="${item.price}"></span>
-									<label>Quantity:</label>
-									<input type="text" value="3" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										장바구니
-									</button>
-								</span>
-								<p><b>Availability:</b> In Stock</p>
-								<p><b>Condition:</b> New</p>
-								<p><b>Brand:</b> E-SHOPPER</p>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
-							</div>
-							<!--/product-information-->
+							<form th:action="@{/addCart}" th:object="${AddCartForm}" th:method="post">
+								<div class="product-information">
+									<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+									<h2 th:text="${item.name}"></h2>
+									<p>Web ID: 1089772</p>
+									<img src="images/product-details/rating.png" alt="" />
+									<span>
+										<span th:text="${item.price} + '원'"></span>
+										<label>Quantity:</label>
+										<input id="itemIdInput" type="text" th:name="itemId" th:value="${item.id}"
+											   style="display: none;">
+										<input type="number" id="orderCount"
+											    th:value="1" th:min="1" th:max="${item.stockQuantity}" th:name="orderCount"/>
+										<button type="submit" class="btn btn-fefault cart">
+											<i class="fa fa-shopping-cart"></i>
+											add Cart
+										</button>
+									</span>
+									<p><b th:text="'재고: ' + ${item.stockQuantity}"></b></p>
+									<p><b>상태:</b> New</p>
+	<!--								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>-->
+								</div>
+							</form>
 						</div>
 					</div>
-					<!--/product-details-->
 
 					<!--category-tab-->
 					<div class="category-tab shop-details-tab">
@@ -462,5 +463,9 @@
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+
+	<script>
+
+	</script>
 </body>
 </html>

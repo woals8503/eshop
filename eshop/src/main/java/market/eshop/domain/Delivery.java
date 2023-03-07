@@ -2,6 +2,7 @@ package market.eshop.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import market.eshop.domain.embadded.Address;
 import market.eshop.domain.status.DeliveryStatus;
 
 import javax.persistence.*;

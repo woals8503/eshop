@@ -1,16 +1,12 @@
-package market.eshop.repository;
+package market.eshop.repository.impl;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
 import market.eshop.domain.Member;
-import market.eshop.domain.QMember;
 import market.eshop.domain.form.LoginForm;
-import org.springframework.beans.factory.annotation.Autowired;
+import market.eshop.repository.custom.MemberRepositoryCustom;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import static market.eshop.domain.QMember.*;

@@ -1,16 +1,16 @@
 package market.eshop.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import market.eshop.domain.base.BaseEntity;
+import market.eshop.domain.embadded.Address;
 import market.eshop.domain.status.OrderStatus;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
@@ -32,4 +32,5 @@ public class Member extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
 }

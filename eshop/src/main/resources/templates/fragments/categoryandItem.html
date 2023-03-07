@@ -83,7 +83,7 @@
                     <h2 th:text="${items.name}"></h2>
                   </a>
                   <p th:text="${items.price}"></p>
-                  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니 담기</a>
+                  <a th:href="@{/itemDetail(id=${items.id})}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>상세보기</a>
                 </div>
               </div>
               <div class="choose">

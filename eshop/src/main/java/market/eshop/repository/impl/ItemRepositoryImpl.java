@@ -1,14 +1,12 @@
-package market.eshop.repository;
+package market.eshop.repository.impl;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import market.eshop.domain.Item;
-import market.eshop.domain.QCategory;
-import market.eshop.domain.QItem;
 import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.dto.QItemDto;
 import market.eshop.domain.form.ItemSearchForm;
+import market.eshop.repository.custom.ItemRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +16,10 @@ import javax.persistence.EntityManager;
 
 import java.util.List;
 
-import static market.eshop.domain.QCategory.*;
 import static market.eshop.domain.QItem.*;
 
 @Repository
-public class ItemRepositoryImpl implements ItemRepositoryCustom{
+public class ItemRepositoryImpl implements ItemRepositoryCustom {
 
     JPAQueryFactory queryFactory;
 
@@ -38,6 +35,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.name,
                         item.imagePath,
                         item.price,
+                        item.stockQuantity,
                         item.categoryId
                 ))
                 .from(item)
@@ -60,6 +58,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.name,
                         item.imagePath,
                         item.price,
+                        item.stockQuantity,
                         item.categoryId
                         ))
                 .from(item)

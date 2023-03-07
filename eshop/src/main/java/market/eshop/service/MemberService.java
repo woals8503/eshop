@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import market.eshop.domain.Member;
 import market.eshop.domain.form.LoginForm;
 import market.eshop.repository.MemberRepository;
-import market.eshop.repository.MemberRepositoryCustom;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +15,12 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final CartService cartService;
 
     public Long join(Member member) {
         validateDuplicateMember(member);
-        memberRepository.save(member);
+        Member saveMember = memberRepository.save(member);
+        cartService.createCart(saveMember.getId());
         return member.getId();
     }
 
