@@ -5,25 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
-public class CartLineDto {
+public class OrderItemDto {
     private Long itemId;
-    private String imagePath;
     private String name;
+    private String imagePath;
     private int price;
     private int orderCount;
-    private int stockQuantity;
-    private int totalPrice;
+    private int totalAmount;
 
     @QueryProjection
-    public CartLineDto(Long itemId, String imagePath, String itemName, int price, int orderCount, int stockQuantity) {
+    public OrderItemDto(Long itemId, String name, String imagePath, int price, int orderCount) {
         this.itemId = itemId;
+        this.name = name;
         this.imagePath = imagePath;
-        this.name = itemName;
         this.price = price;
         this.orderCount = orderCount;
-        this.stockQuantity = stockQuantity;
-        this.totalPrice = orderCount * price;
+        this.totalAmount = price * orderCount;
     }
 }

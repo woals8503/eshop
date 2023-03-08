@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import market.eshop.domain.Item;
 import market.eshop.domain.Member;
 import market.eshop.domain.dto.CartLineDto;
+import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.form.AddCartForm;
+import market.eshop.domain.form.ModifyOrderCountForm;
 import market.eshop.service.CartService;
 import market.eshop.web.session.SessionConst;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +53,25 @@ public class CartController {
         cartService.addCart(member.getId(), form);
 
         return "redirect:/cart";
+    }
+
+    @PutMapping("/cart")
+    @ResponseBody
+    public ResponseEntity modifyOrderCount(@ModelAttribute ModifyOrderCountForm modifyOrderCountForm,
+                                           @SessionAttribute(name = SessionConst.LOGIN_MEMBER,
+                                                   required = false) Member member) {
+        cartService.modifyOrderCount(member.getId(), modifyOrderCountForm);
+        //ResponseEntity 포스팅
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/cart")
+    @ResponseBody
+    public ResponseEntity deleteCartLine(@RequestParam("itemId") Long itemId,
+                                         @SessionAttribute(name = SessionConst.LOGIN_MEMBER,
+                                                 required = false) Member member) {
+        cartService.removeCartLine(member.getId(), itemId);
+        return ResponseEntity.ok().build();
     }
 
 }

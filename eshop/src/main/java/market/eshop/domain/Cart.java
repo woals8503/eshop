@@ -54,4 +54,18 @@ public class Cart {
             throw new NotEnoughStockException("재고 수량이 부족합니다.");
         }
     }
+
+    /** 장바구니 수량 변경 */
+    public void modifyOrderCount(int stockQuantity, CartLine cartLine) {
+        // 현재 재고에서 카트라인의 재고만큼 갱신
+        // 수량 체크
+        checkStockQuantity(stockQuantity, cartLine.getOrderCount());
+        // 갱신
+        this.cart.replace(cartLine.getItemId(), cartLine);
+    }
+
+    /** 장바구니 라인 삭제 */
+    public void removeCartLine(Long itemId) {
+        this.cart.remove(itemId);
+    }
 }
