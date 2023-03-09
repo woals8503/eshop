@@ -19,6 +19,7 @@ public class OrderItem {
     private Long id;
     private int orderPrice;
     private int count;
+    private int orderItemAmount;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id")
@@ -28,4 +29,17 @@ public class OrderItem {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    public OrderItem(int count, Item item) {
+        this.count = count;
+        this.item = item;
+        this.calculateOrderItemAmount();
+    }
+
+    private void calculateOrderItemAmount() {
+        this.orderItemAmount = this.item.getPrice() * count;
+    }
+
+    public void removeStockQuantity() {
+        this.item.removeStockQuantity(count);
+    }
 }

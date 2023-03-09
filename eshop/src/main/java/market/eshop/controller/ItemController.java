@@ -1,11 +1,13 @@
 package market.eshop.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import market.eshop.domain.Item;
 import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.form.AddItemForm;
 import market.eshop.service.CategoryService;
 import market.eshop.service.ItemService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ItemController {
 
     private final CategoryService categoryService;

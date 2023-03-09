@@ -68,7 +68,7 @@
 						<tbody>
 						<tr th:each="cartLine, idx : ${cartList}">
 							<td class="cart_product">
-								<a href=""><img src="images/home/JPA책.PNG" style="width : 130px;"></a>
+								<a href=""><img th:src="'images/home/' + ${cartLine.imagePath}" style="width : 130px;"></a>
 								<h4><a href="" th:text="${cartLine.name}"></a></h4>
 								<p th:text="'남은 재고 : ' + ${cartLine.stockQuantity}"></p>
 							</td>
@@ -97,6 +97,7 @@
 								<input th:id="itemDelete" type="text" th:name="itemId"
 									   th:value="${cartLine.getItemId()}"
 									   style="display: none;">
+								<br>
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>

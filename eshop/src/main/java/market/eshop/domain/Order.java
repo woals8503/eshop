@@ -1,10 +1,8 @@
 package market.eshop.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import market.eshop.domain.base.BaseEntity;
+import market.eshop.domain.status.OrderStatus;
 import org.springframework.data.util.Lazy;
 
 import javax.persistence.*;
@@ -23,6 +21,8 @@ public class Order extends BaseEntity {
     @Column(name = "order_id")
     private Long id;
 
+    private int totalAmount;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -34,5 +34,29 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
+    @Enumerated(value = EnumType.STRING)
+    private OrderStatus status;
 
+    @Builder
+    public Order(Member member, List<OrderItem> orderItems, Delivery delivery) {
+        this.member = member;
+        this.delivery = delivery;
+        this.setOrderItemList(orderItems);
+        this.status = OrderStatus.ORDER;
+    }
+
+    private void setOrderItemList(List<OrderItem> orderItems) {
+        //java.util.ConcurrentModificationException 오류 발생
+        for (OrderItem orderItem : orderItems) {
+            this.orderItems.add(orderItem);
+        }
+        this.calculateTotalAmount();
+    }
+
+    /** 계산 총액 */
+    private void calculateTotalAmount() {
+        this.totalAmount = this.orderItems.stream()
+                .mapToInt(orderItem -> orderItem.getOrderItemAmount())
+                .sum();
+    }
 }

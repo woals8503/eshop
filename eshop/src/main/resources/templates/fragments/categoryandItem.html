@@ -18,7 +18,6 @@
               <div class="panel-heading">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordian" th:href="'#' + ${category.name}">
-
                     <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                     <p th:text="${category.name}"></p>
                   </a>
@@ -78,11 +77,11 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/JPA책.PNG" alt="" />
+                  <img th:src="'images/home/' + ${items.imagePath}" alt="" />
                   <a th:href="@{/itemDetail(id=${items.id})}">
                     <h2 th:text="${items.name}"></h2>
                   </a>
-                  <p th:text="${items.price}"></p>
+                  <p th:text="${#numbers.formatInteger(items.price, 3, 'COMMA')} + '원'"></p>
                   <a th:href="@{/itemDetail(id=${items.id})}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>상세보기</a>
                 </div>
               </div>

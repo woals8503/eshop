@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"/>
+
+<div class="header-bottom"><!--header-bottom-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!--/header-bottom-->
+</header><!--/header-->
+
+<section id="cart_items">
+  <div class="container">
+    <div class="breadcrumbs">
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">order</li>
+      </ol>
+    </div><!--/breadcrums-->
+    <div class="review-payment">
+      <h2>Order</h2>
+    </div>
+
+    <div class="table-responsive cart_info">
+      <table class="table table-condensed">
+        <thead>
+        <tr class="cart_menu">
+          <td class="image">Item</td>
+          <td class="description"></td>
+          <td class="price">Price</td>
+          <td class="quantity">Quantity</td>
+          <td class="total">Total</td>
+          <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderList : ${orderList.getOrderItemList}">
+          <td class="cart_product">
+            <a href=""><img th:src="'images/home/' + ${orderList.imagePath}" alt="" style="width : 130px;"></a>
+            <h4><a href="" th:text="${orderList.name}"></a></h4>
+            <p>Web ID: 1089772</p>
+          </td>
+          <td class="cart_description">
+
+          </td>
+          <td class="cart_price">
+            <p th:text="${#numbers.formatInteger(orderList.price, 3, 'COMMA')} + '원'"></p>
+          </td>
+          <td class="cart_quantity">
+            <div class="cart_quantity_button">
+              <input class="cart_quantity_input" type="text" name="quantity" th:value="${orderList.orderCount}" autocomplete="off" size="2" readonly>
+            </div>
+          </td>
+          <td class="cart_total">
+            <p class="cart_total_price" th:text="${#numbers.formatInteger(orderList.totalAmount, 3, 'COMMA')} + '원'"></p>
+          </td>
+          <td class="cart_delete">
+            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">&nbsp;</td>
+          <td colspan="2">
+            <table class="table table-condensed total-result">
+              <tr>
+                <td>Cart Total</td>
+                <td th:text="${#numbers.formatInteger(orderList.totalAmount, 3, 'COMMA')} + '원'"></td>
+              </tr>
+              <tr>
+                <td>sale</td>
+                <td>$2</td>
+              </tr>
+              <tr class="shipping-cost">
+                <td>Shipping Cost</td>
+                <td>Free</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td><span th:text="${#numbers.formatInteger(orderList.totalAmount, 3, 'COMMA')} + '원'"></span></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="step-one">
+      <h2 class="heading">배송 주소</h2>
+    </div>
+
+    <div class="shopper-informations">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="shopper-info">
+            <p>주문 고객</p>
+            <form>
+              <input type="text" placeholder="Display Name">
+              <input type="text" placeholder="User Name">
+              <input type="password" placeholder="Password">
+              <input type="password" placeholder="Confirm password">
+            </form>
+            <a class="btn btn-primary" th:href="@{/order}">주문</a>
+          </div>
+        </div>
+        <div class="col-sm-5 clearfix">
+          <div class="bill-to">
+            <p>배송 정보</p>
+            <div class="form-one">
+              <form>
+                <input type="text" placeholder="city">
+                <input type="text" placeholder="street">
+                <input type="text" placeholder="zip code">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="order-message">
+            <p>배송 메모</p>
+            <textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+            <label><input type="checkbox"> Shipping to bill address</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> <!--/#cart_items-->
+<footer th:replace="fragments/footer :: footer"/>
+</body>
+</html>

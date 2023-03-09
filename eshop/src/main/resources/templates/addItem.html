@@ -32,7 +32,7 @@
 				<h3>상품 등록</h3>
 				<p>판매하고 싶은 상품의 정보를 입력해주세요</p>
 			</div>
-			<form th:action="@{/addItem}" th:object="${form}" id="itemForm" method="post">
+			<form th:action="@{/addItem}" th:object="${form}" id="itemForm" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="chose_area">
@@ -55,8 +55,15 @@
 											<input type="text" name="stockQuantity" placeholder="stock" />
 										</div>
 									</li>
+									<li>
+										<div class="searchform">
+											<p>이미지 파일</p>
+											<input type="text" name="imagePath" placeholder="imagePath" />
+										</div>
+									</li>
+
 								</ul>
-							<a class="btn btn-default update">사진 첨부</a>
+<!--							<button class="btn btn-default update">사진 첨부</button>-->
 								<ul class="user_info">
 									<!--카테고리 1-->
 									<li class="single_field">
@@ -144,7 +151,7 @@
 										</select>
 									</li>
 								</ul>
-							<a class="btn btn-default update"><button type="submit">등록</button></a>
+							<button class="btn btn-default update" type="submit">등록</button>
 						</div>
 					</div>
 				</div>

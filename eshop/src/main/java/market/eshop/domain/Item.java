@@ -2,6 +2,7 @@ package market.eshop.domain;
 
 import lombok.*;
 import market.eshop.domain.base.BaseEntity;
+import market.eshop.domain.exception.NotEnoughStockException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,5 +30,14 @@ public class Item extends BaseEntity {
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.categoryId = categoryId;
+    }
+
+    public void removeStockQuantity(int orderQuantity) {
+        int restStockQuantity = this.stockQuantity - orderQuantity;
+
+        if(restStockQuantity < 0)
+            throw new NotEnoughStockException();
+
+        this.stockQuantity = restStockQuantity;
     }
 }

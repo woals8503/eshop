@@ -41,4 +41,8 @@ public class MemberService {
 
         return result;
     }
+
+    public Member findMember(Long orderId) {
+        return memberRepository.findById(orderId).get();
+    }
 }

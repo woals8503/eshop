@@ -6,9 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class OrderLineForm {
     private Long itemId;
     private int orderCount;
-
 }

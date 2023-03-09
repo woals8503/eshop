@@ -1,5 +1,6 @@
 package market.eshop.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import market.eshop.domain.embadded.Address;
@@ -21,5 +22,9 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
-
+    @Builder
+    public Delivery(Address address) {
+        this.address = address;
+        this.status = DeliveryStatus.READY;
+    }
 }
