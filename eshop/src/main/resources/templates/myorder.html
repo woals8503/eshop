@@ -54,58 +54,15 @@
 					<div class="response-area">
 						<h2>주문 내역</h2>
 						<ul class="media-list">
-							<li class="media">
+							<li class="media" th:each="orderList : ${orderList.getMyOrderList()}">
 								<a class="pull-left" href="#">
-									<img class="media-object" src="images/home/JPA책.PNG" alt="">
+									<img class="media-object" th:src="'images/home/' + ${orderList.representativeImagePath}" style="height:130px;">
 								</a>
 								<div class="media-body">
-									<h4> 주문 정보</h4>
-									<p>JPA 프로그래밍 외 3건</p>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/home/JPA책.PNG" alt="">
-								</a>
-								<div class="media-body">
-									<h4> 주문 정보</h4>
-									<p>JPA 프로그래밍 외 3건</p>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/home/JPA책.PNG" alt="">
-								</a>
-								<div class="media-body">
-									<h4> 주문 정보</h4>
-									<p>JPA 프로그래밍 외 3건</p>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/home/JPA책.PNG" alt="">
-								</a>
-								<div class="media-body">
-									<h4> 주문 정보</h4>
-									<p>JPA 프로그래밍 외 3건</p>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/home/JPA책.PNG" alt="">
-								</a>
-								<div class="media-body">
-									<h4> 주문 정보</h4>
-									<p>JPA 프로그래밍 외 3건</p>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/home/JPA책.PNG" alt="">
-								</a>
-								<div class="media-body">
-									<h4> 주문 정보</h4>
-									<p>JPA 프로그래밍 외 3건</p>
+									<h4 th:text="${orderList.representativeItemName} + ' 외 3건'" style="font-weight : bold;"></h4>
+									<p th:text="'결제 금액 : ' + ${#numbers.formatInteger(orderList.totalAmount, 3, 'COMMA')} + '원'"></p>
+									<p th:text="${orderList.orderStatus}"></p>
+									<p style="color : #3396FF">리뷰 작성</p>
 								</div>
 							</li>
 						</ul>					
@@ -124,5 +81,8 @@
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
 
+	<script>
+
+	</script>
 </body>
 </html>

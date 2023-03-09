@@ -3,6 +3,7 @@ package market.eshop.controller;
 import jdk.jfr.ContentType;
 import lombok.RequiredArgsConstructor;
 import market.eshop.domain.Member;
+import market.eshop.domain.Order;
 import market.eshop.domain.dto.OrderDto;
 import market.eshop.domain.form.OrderRequestForm;
 import market.eshop.repository.OrderRepository;
@@ -30,7 +31,7 @@ public class OrderController {
 //                .stream()
 //                .map(o -> o.getItemId())
 //                .collect(Collectors.toList());
-        
+
         //회원 아이디, 주문 아이템 번호 를 넘김
         OrderDto result = orderRepository.getOrderInfoInCart(member.getId(), orderItemIdList);
 
@@ -48,6 +49,7 @@ public class OrderController {
                         @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member member) {
         orderService.order(member.getId(), form);
 
-        return "orderComplete";
+        return "redirect:/catalog";
     }
+
 }

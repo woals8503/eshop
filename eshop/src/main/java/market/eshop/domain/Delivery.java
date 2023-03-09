@@ -2,6 +2,7 @@ package market.eshop.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import market.eshop.domain.embadded.Address;
 import market.eshop.domain.status.DeliveryStatus;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Delivery {
 
     @Id @GeneratedValue

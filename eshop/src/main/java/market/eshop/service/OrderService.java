@@ -19,14 +19,13 @@ public class OrderService {
     private final MemberService memberService;
     private final ItemRepository itemRepository;
 
-
     /**
      * 장바구니에서 주문
      *
      * @return
      */
     @Transactional
-    public Long order(Long orderId, OrderRequestForm form) {
+    public Order order(Long orderId, OrderRequestForm form) {
 //        회원 조회
         Member member = memberService.findMember(orderId);
 
@@ -54,7 +53,7 @@ public class OrderService {
                 .delivery(delivery)
                 .orderItems(orderItemList)
                 .build();
-
-        return orderRepository.save(order).getId();
+        Order save = orderRepository.save(order);
+        return save;
     }
 }

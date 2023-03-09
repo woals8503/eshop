@@ -1,0 +1,29 @@
+package market.eshop.controller;
+
+import lombok.RequiredArgsConstructor;
+import market.eshop.domain.Member;
+import market.eshop.domain.dto.MyOrderSummaryDto;
+import market.eshop.service.MyOrderService;
+
+import market.eshop.web.session.SessionConst;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+
+@Controller
+@RequiredArgsConstructor
+public class MyOrderController {
+
+    private final MyOrderService myOrderService;
+
+    @GetMapping("/myOrder")
+    public String getMyOrderListPage(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
+                                         Pageable pageable, Model model)  {
+        MyOrderSummaryDto orderList = myOrderService.getOrderList(member, pageable);
+        model.addAttribute("orderList", orderList);
+        return "myorder";
+    }
+}
