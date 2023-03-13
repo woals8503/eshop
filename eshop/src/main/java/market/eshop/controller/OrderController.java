@@ -34,7 +34,7 @@ public class OrderController {
 
         //회원 아이디, 주문 아이템 번호 를 넘김
         OrderDto result = orderRepository.getOrderInfoInCart(member.getId(), orderItemIdList);
-
+        
         model.addAttribute("orderList", result);
         return "checkout";
     }

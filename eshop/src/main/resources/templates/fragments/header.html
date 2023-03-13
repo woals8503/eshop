@@ -75,9 +75,9 @@
                             <li><a th:href="@{/myOrder}"><i class="fa fa-user"></i> 주문 내역</a></li>
                             <li><a href="/addItem"><i class="fa fa-star"></i> 상품 등록</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a th:if="${member == null}" href="/login"><i class="fa fa-lock"></i> Login</a></li>
-                            <li><a th:if="${member != null}" href="/logout"><i class="fa fa-lock"></i> Logout</a></li>
+                            <li><a href="/cart"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+                            <li><a th:if="${member == null}" href="/login"><i class="fa fa-lock"></i> 로그인</a></li>
+                            <li><a th:if="${member != null}" href="/logout"><i class="fa fa-lock"></i> 로그아웃</a></li>
                         </ul>
                     </div>
                 </div>

@@ -2,12 +2,8 @@ package market.eshop.repository.impl;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import market.eshop.domain.Order;
-import market.eshop.domain.QDelivery;
-import market.eshop.domain.QMember;
-import market.eshop.domain.QOrder;
+import market.eshop.domain.*;
 import market.eshop.repository.custom.MyOrderRepositoryCustom;
-import market.eshop.repository.custom.OrderRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +11,14 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
+import static market.eshop.domain.QCart.*;
 import static market.eshop.domain.QDelivery.*;
+import static market.eshop.domain.QItem.*;
 import static market.eshop.domain.QMember.*;
 import static market.eshop.domain.QOrder.*;
+import static market.eshop.domain.QOrderItem.*;
 
 @Repository
 public class MyOrderRepositoryImpl implements MyOrderRepositoryCustom {
@@ -47,4 +47,19 @@ public class MyOrderRepositoryImpl implements MyOrderRepositoryCustom {
 
         return new PageImpl<>(contents, pageable, total);
     }
+
+    @Override
+    public Optional<Order> findByOrderDetailList(Long orderId) {
+        Order order = queryFactory
+                .select(QOrder.order)
+                .from(QOrder.order)
+                .join(QOrder.order.member).fetchJoin()
+                .join(QOrder.order.delivery).fetchJoin()
+                .where(QOrder.order.id.eq(orderId))
+                .fetchOne();
+
+        return Optional.of(order);
+    }
+
+
 }

@@ -54,12 +54,12 @@
 					<div class="response-area">
 						<h2>주문 내역</h2>
 						<ul class="media-list">
-							<li class="media" th:each="orderList : ${orderList.getMyOrderList()}">
-								<a class="pull-left" href="#">
+							<li class="media" th:each="orderList, idx : ${orderList.getMyOrderList()}">
+								<a class="pull-left" th:href="@{/myOrderDetail(id=${orderList.orderId})}">
 									<img class="media-object" th:src="'images/home/' + ${orderList.representativeImagePath}" style="height:130px;">
 								</a>
 								<div class="media-body">
-									<h4 th:text="${orderList.representativeItemName} + ' 외 3건'" style="font-weight : bold;"></h4>
+									<h4 th:text="${orderList.representativeItemName} + ' 외 ' + ${orderList.orderCount} + '건'" style="font-weight : bold;"></h4>
 									<p th:text="'결제 금액 : ' + ${#numbers.formatInteger(orderList.totalAmount, 3, 'COMMA')} + '원'"></p>
 									<p th:text="${orderList.orderStatus}"></p>
 									<p style="color : #3396FF">리뷰 작성</p>
