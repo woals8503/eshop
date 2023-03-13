@@ -51,6 +51,7 @@ public class MyOrderService {
         //주문 정보
         Order order = myOrderRepository.findByOrderDetailList(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 주문번호입니다."));
+        System.out.println(order.getStatus());
 
         //주문 상품 DTO 변환 작업
         List<MyOrderDetailItemDto> myOrderDetailItemDtoList = order.getOrderItems().stream()
@@ -64,7 +65,7 @@ public class MyOrderService {
                 .orderId(orderId)
                 .myOrderItemDtoList(myOrderDetailItemDtoList)
                 .totalAmount(order.getTotalAmount())
-                .orderStatus(order.getStatus())
+                .orderStatus(order.getStatus().getStatus())
                 .orderDate(order.getCreatedDate())
                 .build();
 

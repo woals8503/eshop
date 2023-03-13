@@ -14,6 +14,6 @@ public class MyOrderDetailDto {
     private Long orderId;
     private List<MyOrderDetailItemDto> myOrderItemDtoList;
     private int totalAmount;
-    private OrderStatus orderStatus;
+    private String orderStatus;
     private LocalDateTime orderDate;
 }

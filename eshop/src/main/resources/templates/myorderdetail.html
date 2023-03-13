@@ -61,11 +61,12 @@
       <table class="table table-condensed">
         <thead>
         <tr class="cart_menu">
-          <td class="image">Item</td>
+          <td class="image">상품</td>
           <td class="description"></td>
-          <td class="price">Price</td>
-          <td class="quantity">Quantity</td>
-          <td class="total">Total</td>
+          <td class="price">결제 금액</td>
+          <td class="quantity">구매 수량</td>
+          <td class="total">총 금액</td>
+          <td class="total">주문 상태</td>
           <td></td>
         </tr>
         </thead>
@@ -90,8 +91,8 @@
           <td class="cart_total">
             <p class="cart_total_price" th:text="${#numbers.formatInteger(orderList.totalAmount, 3, 'COMMA')} + '원'"></p>
           </td>
-          <td class="cart_delete">
-            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+          <td class="">
+            <p th:text="${myOrderDetailList.orderStatus}"></p>
           </td>
         </tr>
         <tr>
@@ -99,19 +100,15 @@
           <td colspan="2">
             <table class="table table-condensed total-result">
               <tr>
-                <td>Cart Total</td>
-                <td th:text="${#numbers.formatInteger(myOrderDetailList.totalAmount, 3, 'COMMA')} + '원'"></td>
-              </tr>
-              <tr>
-                <td>sale</td>
-                <td>$2</td>
+                <td>할인</td>
+                <td>0원</td>
               </tr>
               <tr class="shipping-cost">
-                <td>Shipping Cost</td>
+                <td>배송비</td>
                 <td>Free</td>
               </tr>
               <tr>
-                <td>Total</td>
+                <td>총 주문 금액</td>
                 <td><span th:text="${#numbers.formatInteger(myOrderDetailList.totalAmount, 3, 'COMMA')} + '원'"></span></td>
               </tr>
             </table>

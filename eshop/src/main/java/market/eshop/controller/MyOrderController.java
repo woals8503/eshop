@@ -25,7 +25,6 @@ public class MyOrderController {
     public String getMyOrderListPage(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
                                          Pageable pageable, Model model)  {
         MyOrderSummaryDto orderList = myOrderService.getOrderList(member, pageable);
-        orderList.getMyOrderList().get(0).getOrderId();
         model.addAttribute("orderList", orderList);
         return "myorder";
     }
@@ -35,7 +34,7 @@ public class MyOrderController {
                                    @SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
                                    Model model) {
         MyOrderDetailDto result = myOrderService.getMyOrderDetail(member, orderId);
-        System.out.println(result.getTotalAmount());
+
         model.addAttribute("myOrderDetailList", result);
         return "myorderdetail";
     }
