@@ -37,7 +37,25 @@ JPA, querydsl을 활용한쇼핑몰
 6. 상품 등록 기능
 <br><br>
 
-## 1. 도메인
+### 1. 도메인
+<p align="center">
+  <img src="./readme_assets/domain.PNG">
+<p>
+<br>
+  
+  ### 1. 도메인
+<p align="center">
+  <img src="./readme_assets/domain.PNG">
+<p>
+<br>
+  
+  ### 1. 도메인
+<p align="center">
+  <img src="./readme_assets/domain.PNG">
+<p>
+<br>
+  
+  ### 1. 도메인
 <p align="center">
   <img src="./readme_assets/domain.PNG">
 <p>
