@@ -27,13 +27,13 @@ JPA, querydsl을 활용한쇼핑몰
 
 ## 🔨 프로젝트 기능
 
-|프로젝트 |
+|기능 |
 |:--:|
 |로그인 / 회원가입 |
 |카테고리 기능 - https://philarfun1.tistory.com/90 |
 |장바구니 기능 - https://philarfun1.tistory.com/91 |
 |주문 기능 - https://philarfun1.tistory.com/92 |
-|주문 내역 조회 기능 - https://philarfun1.tistory.com/93 |
+|주문 내역 조회 기능 - https://philarfun1.tistory.com/93 (N + 1 문제 )|
 |상품 등록 기능 |
 
 ### 1. 로그인
