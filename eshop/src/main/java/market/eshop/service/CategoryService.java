@@ -3,6 +3,7 @@ package market.eshop.service;
 import lombok.RequiredArgsConstructor;
 import market.eshop.domain.dto.CategoryDto;
 import market.eshop.repository.CategoryRepository;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,18 +20,20 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
     public CategoryDto createCategoryRoot() {
-        //모든 카테고리 가져온후 Dto로 변환하고, 부모 아이디별로 grouping
+        //모든 카테고리 가져온후 Dto로 변환하고, 부모 아이디별로 (map key) grouping
         Map<Long, List<CategoryDto>> groupParentId = categoryRepository.findAll()
                 .stream()
                 .map(c -> new CategoryDto(c.getId(), c.getName(), c.getParentId()))
                 .collect(groupingBy(d -> d.getParentId()));
-        //부모 생성
+
+        //최초 루트 생성 ( 부모 X )
         CategoryDto rootCategoryDto = new CategoryDto(0l, "ROOT", null);
         addSubCategories(rootCategoryDto, groupParentId);
         return rootCategoryDto;
     }
 
     private void addSubCategories(CategoryDto parent, Map<Long, List<CategoryDto>> groupParentId) {
+        //서브 카테고리
         List<CategoryDto> subCategories = groupParentId.get(parent.getId());
 
         // 종료 조건
@@ -42,7 +45,7 @@ public class CategoryService {
 
         subCategories.stream()
                 .forEach(s -> {
-                   addSubCategories(s, groupParentId);
-                });
+                    addSubCategories(s, groupParentId);
+                }); 
     }
 }

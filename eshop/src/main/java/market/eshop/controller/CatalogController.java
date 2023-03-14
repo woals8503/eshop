@@ -1,11 +1,9 @@
 package market.eshop.controller;
 
 import lombok.RequiredArgsConstructor;
-import market.eshop.domain.Category;
 import market.eshop.domain.Member;
 import market.eshop.domain.dto.ItemDto;
 import market.eshop.domain.form.ItemSearchForm;
-import market.eshop.domain.form.MemberForm;
 import market.eshop.repository.MemberRepository;
 import market.eshop.service.CatalogService;
 import market.eshop.service.CategoryService;
@@ -19,8 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,13 +28,6 @@ public class CatalogController {
     private final MemberRepository memberRepository;
     private final SessionManager sessionManager;
 
-    /**
-     * @param category
-     * @param itemForm
-     * @param memberId
-     * @param model
-     * @return
-     */
     @GetMapping("/catalog")
     public String getMainPage(@RequestParam(value = "id", required = false) Long category,
                               @ModelAttribute ItemSearchForm searchForm,
@@ -47,11 +36,6 @@ public class CatalogController {
                               @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, // 세션 생성 x
                               Model model) {
         model.addAttribute("rootCategory", categoryService.createCategoryRoot());
-
-        if(searchForm == null)
-            model.addAttribute("itemSearchForm", new ItemSearchForm());
-        else
-            model.addAttribute("itemSearchForm", searchForm);
 
         searchForm.setCategoryId(category);
 

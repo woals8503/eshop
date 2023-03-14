@@ -35,7 +35,6 @@
                       <div th:id="${level2.name}" class="panel-collapse collapse">
                         <div class="panel-body">
                           <ul>
-                            <form action="/catalog"></form>
                             <li th:each="lv3 : ${rootCategory.subCategories.get(idx.index).subCategories.get(lv2Idx.index).subCategories}">
                               <a th:href="@{/catalog(id=${lv3.id})}">
                                 <span th:text="${lv3.name}"></span>

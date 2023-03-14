@@ -17,13 +17,16 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final CartService cartService;
 
+    /** 회원가입 */
     public Long join(Member member) {
         validateDuplicateMember(member);
         Member saveMember = memberRepository.save(member);
+        //회원가입 하는 동시에 장바구니 생성
         cartService.createCart(saveMember.getId());
         return member.getId();
     }
 
+    /** 이메일 중복 체크 */
     private void validateDuplicateMember(Member member) {
         List<Member> result =
                 memberRepository.findByEmail(member.getEmail());

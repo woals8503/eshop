@@ -13,6 +13,6 @@ public class AddCartForm {
 
     private Long itemId;
 
-    @Min(1) //최소 1개는 주문해야함
+    @Min(1)
     private Integer orderCount;
 }
