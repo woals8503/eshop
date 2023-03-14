@@ -18,12 +18,7 @@ JPA, Querydsl을 이용한 쇼핑몰
 
 ## ⚙️ 기술 스택
 <p align="center">
-  <tr>
-    <td>jpa</td>
-    <td>jpa</td>
-    <td>jpa</td>
-    <td>jpa</td>
-  <tr>  
+  SpringBoot     JPA     Querydsl 
 <p/>
 
 
