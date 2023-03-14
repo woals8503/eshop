@@ -29,7 +29,10 @@ JPA, querydsl을 활용한쇼핑몰
 
 ## 🔨 프로젝트 기능
   
-  1. 로그인 / 회원가입
+티스토리 개인 블로그 - https://philarfun1.tistory.com/
+  
+1. 도메인 설계 - https://philarfun1.tistory.com/94
+1. 로그인 / 회원가입
 2. 카테고리 기능 - https://philarfun1.tistory.com/90
 3. 장바구니 기능 - https://philarfun1.tistory.com/91
 4. 주문 기능 - https://philarfun1.tistory.com/92
