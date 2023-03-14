@@ -8,7 +8,7 @@
 
 ## :convenience_store: 프로젝트 소개
 ```
-JPA, querydsl을 활용한쇼핑몰
+JPA, querydsl을 활용한 쇼핑몰
 ```
 
 
