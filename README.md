@@ -20,6 +20,7 @@ JPA, querydsl을 활용한쇼핑몰
 ## 🔨 목표
 
 |목표|
+|:--:|
 |JPA에 대한 이해와 성능 최적화 |
 |유지보수와 새로운 기능 확장을 고려한 설계 |
 |querydsl 적응 |
@@ -27,6 +28,7 @@ JPA, querydsl을 활용한쇼핑몰
 ## 🔨 프로젝트 기능
 
 |기능 |
+|:--:|
 |로그인 / 회원가입 |
 |카테고리 기능 - https://philarfun1.tistory.com/90 |
 |장바구니 기능 - https://philarfun1.tistory.com/91 |
