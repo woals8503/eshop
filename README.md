@@ -39,7 +39,7 @@ JPA, querydsl을 활용한쇼핑몰
 
 ### 1. 도메인
 <p align="center">
-  <img src="./Readme_assets/login.jpg">
+  <img src="./readme_assets/domain.PNG">
 <p>
 <br>
 
