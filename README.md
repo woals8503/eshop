@@ -1,9 +1,6 @@
 
 <h1 align="center">JPA 개인 프로젝트</h1>
 
-<p align="center">
-  <img src="./Readme_assets/메인페이지.jpg">
-<p>
 
 
 ## :convenience_store: 프로젝트 소개
