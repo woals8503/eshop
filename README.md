@@ -36,7 +36,7 @@ JPA, querydsl을 활용한쇼핑몰
 |주문 내역 조회 기능 - https://philarfun1.tistory.com/93 (N + 1 문제 )|
 |상품 등록 기능 |
 
-### 1. 로그인
+### 1. 도메인
 <p align="center">
   <img src="./Readme_assets/login.jpg">
 <p>
