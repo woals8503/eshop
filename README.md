@@ -36,30 +36,23 @@ JPA, querydsl을 활용한쇼핑몰
 5. 주문 내역 조회 기능 - https://philarfun1.tistory.com/93 (N + 1 문제 )
 6. 상품 등록 기능
 <br><br>
+  
+## 🔨 기능 설명
+  
+  1. 로그인 / 회원가입
+2. 카테고리 기능 - https://philarfun1.tistory.com/90
+3. 장바구니 기능 - https://philarfun1.tistory.com/91
+4. 주문 기능 - https://philarfun1.tistory.com/92
+5. 주문 내역 조회 기능 - https://philarfun1.tistory.com/93 (N + 1 문제 )
+6. 상품 등록 기능
+<br><br>
 
 ### 1. 도메인
 <p align="center">
   <img src="./readme_assets/domain.PNG">
 <p>
 <br>
-  
-  ### 1. 도메인
-<p align="center">
-  <img src="./readme_assets/domain.PNG">
-<p>
-<br>
-  
-  ### 1. 도메인
-<p align="center">
-  <img src="./readme_assets/domain.PNG">
-<p>
-<br>
-  
-  ### 1. 도메인
-<p align="center">
-  <img src="./readme_assets/domain.PNG">
-<p>
-<br>
+
 
 
 
